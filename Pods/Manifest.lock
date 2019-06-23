@@ -1,0 +1,20 @@
+PODS:
+  - Alamofire (5.0.0-beta.6)
+  - PromisedFuture (1.0.1)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.0.0.beta.1)
+  - PromisedFuture
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - PromisedFuture
+
+SPEC CHECKSUMS:
+  Alamofire: cd08a4402bd12cacd0c66f23fb12fec8d6b965e4
+  PromisedFuture: 3f863d17c047c3474c85045b254bb1c94743ed0f
+
+PODFILE CHECKSUM: a3a59ffdbe45b9576aa93a718705f3e3ce905228
+
+COCOAPODS: 1.5.3
