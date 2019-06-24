@@ -34,3 +34,20 @@ class ProjectTableViewCell: UITableViewCell {
         startActivityIndicator(projectActivityIndicator)
     }
 }
+
+extension UITableViewCell {
+    func setupActivityIndicator(_ activityIndicator: UIActivityIndicatorView) {
+        activityIndicator.style = UIActivityIndicatorView.Style.whiteLarge
+        activityIndicator.color = .red
+        activityIndicator.isHidden = false
+    }
+    
+    func startActivityIndicator(_ activityIndicator: UIActivityIndicatorView) {
+        activityIndicator.startAnimating()
+    }
+    
+    func stopActivityIndicator(_ activityIndicator: UIActivityIndicatorView) {
+        activityIndicator.isHidden = true
+        activityIndicator.stopAnimating()
+    }
+}

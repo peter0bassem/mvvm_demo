@@ -29,3 +29,19 @@ extension AllProjectsViewController: UITableViewDataSource, UITableViewDelegate 
         return cell
     }
 }
+
+extension UITableView {
+    
+    func registerCell<Cell: UITableViewCell>(cell: Cell.Type) {
+        let nibName = String(describing: Cell.self)
+        self.register(UINib(nibName: nibName, bundle: nil), forCellReuseIdentifier: nibName)
+    }
+    
+    func dequeue<Cell: UITableViewCell>(at indexPath: IndexPath) -> Cell {
+        let identifier = String(describing: Cell.self)
+        guard let cell = self.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? Cell else {
+            fatalError("Could not dequeue table view cell")
+        }
+        return cell
+    }
+}

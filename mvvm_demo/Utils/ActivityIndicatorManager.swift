@@ -50,3 +50,12 @@ class ActivityIndicatorManager  {
         containerView.removeFromSuperview()
     }
 }
+
+extension UIColor {
+    convenience init(rgbValue:UInt32, alpha:Double=1.0) {
+        let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
+        let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
+        let blue = CGFloat(rgbValue & 0xFF)/256.0
+        self.init(red: CGFloat(red) / 255, green: CGFloat(green) / 255, blue: CGFloat(blue) / 255, alpha: CGFloat(alpha))
+    }
+}
