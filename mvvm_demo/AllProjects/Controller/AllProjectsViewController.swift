@@ -14,38 +14,49 @@ class AllProjectsViewController: UIViewController {
     
     var projectViewModels = [AllProjectsViewModel]()
     
-    let projectsViewModel = AllProjectsViewModel()
+    lazy var projectsViewModel: AllProjectsViewModel = {
+       let viewModel = AllProjectsViewModel(delegate: self)
+        return viewModel
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        title = "All Projects"
-        
-        projectsViewModel.delegate = self
+        projectsViewModel.setNavigationTitle(title: "Test title")
         
         setupProjectsTableView()
         fetchAllProjects()
     }
     
     func fetchAllProjects() {
-        projectsViewModel.fetchProjects()
+        DispatchQueue.global().async {
+            self.projectsViewModel.fetchProjects()
+        }
     }
 }
 
 extension AllProjectsViewController: AllProjectsViewModelDelegate {
+    
+    func setViewTitle(title: String) {
+        navigationItem.title = title
+    }
     
     func didStartFetchingProjects() {
         ActivityIndicatorManager.shared.showProgressView()
     }
     
     func didFinishFetchingProjectsWithSuccess(with projectModel: ProjectsModel) {
-        self.projectViewModels = projectModel.projects?.map({ return AllProjectsViewModel(project: $0) }) ?? []
-        self.projectsTableView.reloadData()
+        DispatchQueue.main.async {
+            self.projectViewModels = projectModel.projects?.map({ return AllProjectsViewModel(project: $0) }) ?? []
+            self.projectsTableView.reloadData()
+        }
     }
     
     func didFinishFetchingProjectsWithFailure(with error: Error) {
-        print(error.localizedDescription)
+        DispatchQueue.main.async {
+            print(error.localizedDescription)
+        }
     }
     
     func dismissLoadingView() {

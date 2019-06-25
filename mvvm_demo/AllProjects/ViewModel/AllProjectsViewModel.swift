@@ -9,6 +9,7 @@
 import Foundation
 
 protocol AllProjectsViewModelDelegate {
+    func setViewTitle(title: String)
     func didStartFetchingProjects()
     func didFinishFetchingProjectsWithSuccess(with projectModel: ProjectsModel)
     func didFinishFetchingProjectsWithFailure(with error: Error)
@@ -23,7 +24,8 @@ class AllProjectsViewModel {
     
     var delegate: AllProjectsViewModelDelegate?
     
-    init() {
+    init(delegate: AllProjectsViewModelDelegate) {
+        self.delegate = delegate
         self.productName = nil
         self.productImage = nil
         self.productConcurrency = nil
@@ -33,6 +35,10 @@ class AllProjectsViewModel {
         self.productImage = project.project_img
         self.productName = project.project_name
         self.productConcurrency = project.project_concurency
+    }
+    
+    func setNavigationTitle(title: String) {
+        delegate?.setViewTitle(title: title)
     }
     
     func fetchProjects() {

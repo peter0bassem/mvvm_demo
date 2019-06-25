@@ -14,7 +14,7 @@ enum AllProjectsEndPoint: APIConfiguration {
     case getAllProjects
     
     //MARK: - HTTP Method
-    internal var method: HTTPMethod {
+     var method: HTTPMethod {
         switch self {
         case .getAllProjects:
             return .get
